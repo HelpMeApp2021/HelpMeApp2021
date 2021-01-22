@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../services/firebase_services/database_service.dart';
 
 class ProblemViewBody extends StatelessWidget {
   const ProblemViewBody({
@@ -8,61 +11,95 @@ class ProblemViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 5),
-        ),
-        Text.rich(TextSpan(
-            text: 'Titre : ',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[50]),
-            children: [
-              TextSpan(
-                text: '...',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[50]),
-              )
-            ])),
-        const Padding(
-          padding: EdgeInsets.only(top: 5),
-        ),
-        Text.rich(TextSpan(
-            text: 'Référence appareil : ',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[50]),
-            children: [
-              TextSpan(
-                text: '...',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[50]),
-              )
-            ])),
-        const Padding(
-          padding: EdgeInsets.only(top: 5),
-        ),
-        Text.rich(TextSpan(
-            text: 'Description : ',
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.grey[50]),
-            children: [
-              TextSpan(
-                text: "...",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.normal, color: Colors.grey[50]),
-              )
-            ])),
+    final _databaseService = DatabaseService();
 
-        const Padding(
-          padding: EdgeInsets.only(top: 10),
-        ),
-        Center(
-          child: Container(
-            decoration: const BoxDecoration(),
-            child: const Text(
-              'Réponses ',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-          ),
-        ),
-      ],
+    return StreamBuilder(
+        stream: _databaseService
+            .getDocument('Posts', context.watch<String>())
+            .asStream(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
 
-
-    );
+          return Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 5),
+              ),
+              Text.rich(TextSpan(
+                  text: 'Titre : ' + snapshot.data['titre'].toString(),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[50]),
+                  children: [
+                    TextSpan(
+                      text: '...',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey[50]),
+                    )
+                  ])),
+              const Padding(
+                padding: EdgeInsets.only(top: 5),
+              ),
+              Text.rich(TextSpan(
+                  text: 'Référence appareil : ' +
+                      snapshot.data['reference'].toString(),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[50]),
+                  children: [
+                    TextSpan(
+                      text: '...',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey[50]),
+                    )
+                  ])),
+              const Padding(
+                padding: EdgeInsets.only(top: 5),
+              ),
+              Text.rich(TextSpan(
+                  text: 'Description : ' +
+                      snapshot.data['description'].toString(),
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[50]),
+                  children: [
+                    TextSpan(
+                      text: "...",
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.grey[50]),
+                    )
+                  ])),
+              const Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+              Center(
+                child: Container(
+                  decoration: const BoxDecoration(),
+                  child: const Text(
+                    'Réponses ',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }
