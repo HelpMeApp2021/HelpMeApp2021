@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../home_page/home_page.dart';
+import '../../pages/home_page/home_page.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({

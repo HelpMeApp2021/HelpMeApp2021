@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../services/firebase_services/auth_service.dart';
+import '../../../../services/firebase_services/auth_service.dart';
 import 'home_drawer_menu.dart';
 
 class HomeDrawer extends StatelessWidget {
@@ -16,7 +16,6 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final _firebaseUser = context.watch<User>();
     final _scrollController = ScrollController();
-
     return Drawer(
       child: Container(
         color: const Color(0xff34495E),
