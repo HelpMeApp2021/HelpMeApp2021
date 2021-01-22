@@ -4,7 +4,7 @@ class DatabaseService {
   final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
 
   final CollectionReference postsCollection =
-      FirebaseFirestore.instance.collection("/Posts");
+      FirebaseFirestore.instance.collection('/Posts');
 
   Stream<QuerySnapshot> getCollectionSnapshotStream(String collection) {
     return firebaseFirestore.collection(collection).snapshots();
@@ -19,7 +19,7 @@ class DatabaseService {
   Future<DocumentReference> addDocument(
       String collection, String titre, String reference, String description) {
     return firebaseFirestore.collection(collection).add(
-        {"titre": titre, "reference": reference, "description": description});
+        {'titre': titre, 'reference': reference, 'description': description});
   }
 
   Future<DocumentSnapshot> getDocument(String collection, String id) {

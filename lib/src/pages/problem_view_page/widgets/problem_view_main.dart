@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:help_me_app/src/pages/problem_view_page/widgets/problem_view_body.dart';
+
+import 'problem_view_body.dart';
 
 class ProblemViewMain extends StatelessWidget {
   const ProblemViewMain({

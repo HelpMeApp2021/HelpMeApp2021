@@ -76,28 +76,27 @@ class HomeBody extends StatelessWidget {
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             Expanded(
-                flex: 1,
                 child: Text(
-                  "Description du problème :",
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                )),
-            Padding(padding: EdgeInsets.all(50.0)),
+              'Description du problème :',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.grey[350]),
+            )),
+            const Padding(padding: EdgeInsets.all(50)),
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             Expanded(
               child: TextFormField(
                 controller: descriptionProbleme,
-                decoration:
-                    InputDecoration(labelText: 'Description du probleme*'),
+                decoration: const InputDecoration(
+                    labelText: 'Description du probleme*'),
                 keyboardType: TextInputType.multiline,
                 minLines: 7,
                 maxLines: 10,
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                validator: (String value) {
+                validator: (value) {
                   if (value.isEmpty) {
                     return 'Entrez une description pour votre problème';
                   }
@@ -105,16 +104,16 @@ class HomeBody extends StatelessWidget {
                 },
               ),
             ),
-            Padding(padding: EdgeInsets.all(25.0)),
+            const Padding(padding: EdgeInsets.all(25)),
           ]),
           IconButton(
-            icon: Icon(Icons.post_add),
+            icon: const Icon(Icons.post_add),
             iconSize: 50,
             color: Colors.white,
             onPressed: () {
               //Truc à faire à l'appui, c'est pas mon problème.
               _databaseService
-                  .addDocument("Posts", titreProbleme.text,
+                  .addDocument('Posts', titreProbleme.text,
                       referenceAppareil.text, descriptionProbleme.text)
                   .then((docRef) => Navigator.push<ProblemViewPage>(
                       context,

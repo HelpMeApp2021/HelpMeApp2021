@@ -30,7 +30,7 @@ class ProblemViewBody extends StatelessWidget {
                 padding: EdgeInsets.only(top: 5),
               ),
               Text.rich(TextSpan(
-                  text: 'Titre : ' + snapshot.data['titre'].toString(),
+                  text: 'Titre : ${snapshot.data['titre']}',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -48,8 +48,7 @@ class ProblemViewBody extends StatelessWidget {
                 padding: EdgeInsets.only(top: 5),
               ),
               Text.rich(TextSpan(
-                  text: 'Référence appareil : ' +
-                      snapshot.data['reference'].toString(),
+                  text: 'Référence appareil : ${snapshot.data['reference']}',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -67,15 +66,14 @@ class ProblemViewBody extends StatelessWidget {
                 padding: EdgeInsets.only(top: 5),
               ),
               Text.rich(TextSpan(
-                  text: 'Description : ' +
-                      snapshot.data['description'].toString(),
+                  text: 'Description : ${snapshot.data['description']}',
                   style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[50]),
                   children: [
                     TextSpan(
-                      text: "...",
+                      text: '...',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
