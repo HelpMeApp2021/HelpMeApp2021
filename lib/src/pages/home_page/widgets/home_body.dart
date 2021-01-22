@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_app/src/services/firebase_services/database_service.dart';
 
 class HomeBody extends StatelessWidget {
-
   const HomeBody({
     Key key,
   }) : super(key: key);
@@ -11,9 +11,11 @@ class HomeBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final TextEditingController titreProbleme = TextEditingController();
-    final TextEditingController referenceAppareil = TextEditingController();
-    final TextEditingController descriptionProbleme = TextEditingController();
+    final _databaseService = DatabaseService();
+
+    final titreProbleme = TextEditingController();
+    final referenceAppareil = TextEditingController();
+    final descriptionProbleme = TextEditingController();
 
     return Padding(
       padding: const EdgeInsets.all(30.0),
@@ -113,7 +115,8 @@ class HomeBody extends StatelessWidget {
                       controller: descriptionProbleme,
                       decoration: InputDecoration(labelText: 'Description du probleme*'),
                       keyboardType: TextInputType.multiline,
-                      maxLines: null,
+                      minLines: 7,
+                      maxLines: 10,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.grey[350]
@@ -135,6 +138,7 @@ class HomeBody extends StatelessWidget {
               color: Colors.white,
               onPressed: () {
                     //Truc à faire à l'appui, c'est pas mon problème.
+                _databaseService.addDocument("Posts", titreProbleme.text, referenceAppareil.text, descriptionProbleme.text);
               },
             )
           ],
