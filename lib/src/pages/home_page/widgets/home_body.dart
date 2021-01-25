@@ -17,6 +17,7 @@ class HomeBody extends StatelessWidget {
     final titreProbleme = TextEditingController();
     final referenceAppareil = TextEditingController();
     final descriptionProbleme = TextEditingController();
+    final tagsProbleme = TextEditingController();
 
     return Padding(
       padding: const EdgeInsets.all(30),
@@ -105,6 +106,33 @@ class HomeBody extends StatelessWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.all(25)),
+          ]),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+            Expanded(
+              //TODO : Ajouter les tags dans la base de données.
+                child: Text(
+                  'Tags (séparés par une virgule) :',
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
+                )),
+            Expanded(
+              child: TextFormField(
+                controller: tagsProbleme,
+                decoration:
+                const InputDecoration(labelText: 'Tags'),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold, color: Colors.grey[350]),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Entrez les tags pour votre problème.';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            const Padding(padding: EdgeInsets.all(15)),
           ]),
           IconButton(
             icon: const Icon(Icons.post_add),
