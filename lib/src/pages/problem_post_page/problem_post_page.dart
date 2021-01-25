@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'widgets/drawer/home_drawer.dart';
-import 'widgets/home_main.dart';
+import 'widgets/drawer/problem_post_drawer.dart';
+import 'widgets/problem_post_main.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({
+class ProblemPostPage extends StatelessWidget {
+  const ProblemPostPage({
     Key key,
   }) : super(key: key);
 
@@ -24,10 +24,10 @@ class HomePage extends StatelessWidget {
         backgroundColor: const Color(0xff2E4053),
         appBar: AppBar(
           backgroundColor: const Color(0xff2E4060),
-          title: const Text('Accueil'),
+          title: const Text('Poster un problème'),
         ),
-        drawer: const HomeDrawer(),
-        body: const HomeMain(),
+        drawer: const ProblemPostDrawer(),
+        body: const ProblemPostMain(),
       ),
     );
   }
