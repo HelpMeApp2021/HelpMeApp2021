@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../pages/home_page/home_page.dart';
+import '../../pages/login_page/login_page.dart';
 
 class AuthWrapper extends StatelessWidget {
   const AuthWrapper({
@@ -15,11 +16,9 @@ class AuthWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User>();
 
     if (firebaseUser != null) {
-      //return const HomePage();
+      return const HomePage();
     }
 
-    //return const LoginPage();
-
-    return const HomePage();
+    return const LoginPage();
   }
 }

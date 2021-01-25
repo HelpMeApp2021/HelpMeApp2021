@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'database_service.dart';
+
 class AuthService {
   AuthService(this._firebaseAuth);
 
@@ -26,17 +28,22 @@ class AuthService {
   Future<String> signUp(
       {@required String email,
       @required String password,
-      @required String pseudo,
-      @required String photoUrl}) async {
+      @required String pseudo}) async {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
       await userCredential.user
-          .updateProfile(displayName: pseudo, photoURL: photoUrl);
+          .updateProfile(displayName: pseudo);
       await signIn(email: email, password: password);
-      //await FirebaseFirestore.instance.collection('users').doc(userCredential.user.uid).set({
-      //  'tour': {'events': []}
-      //});
+
+      final _databaseService = DatabaseService();
+
+      await _databaseService.firebaseFirestore.collection('Users').doc(userCredential.user.uid).set({
+        'postsRefs': [],
+        'appareils': [],
+        'abonnmnt': [],
+        'listenotifs': [],
+      });
 
       return 'Signed up';
     } on FirebaseAuthException catch (e) {

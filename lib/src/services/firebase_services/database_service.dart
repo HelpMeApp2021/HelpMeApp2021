@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
-  final FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
-  final CollectionReference postsCollection =
-      FirebaseFirestore.instance.collection('/Posts');
+  FirebaseFirestore get firebaseFirestore => _firebaseFirestore;
 
   Stream<QuerySnapshot> getCollectionSnapshotStream(String collection) {
     return firebaseFirestore.collection(collection).snapshots();
@@ -24,5 +23,9 @@ class DatabaseService {
 
   Future<DocumentSnapshot> getDocument(String collection, String id) {
     return firebaseFirestore.collection(collection).doc(id).get();
+  }
+
+  Stream<QuerySnapshot> getCollectionSnapshots(String collection) {
+    return firebaseFirestore.collection(collection).snapshots();
   }
 }
