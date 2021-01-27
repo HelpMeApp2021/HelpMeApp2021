@@ -30,23 +30,30 @@ class HomeBody extends StatelessWidget {
               children: snapshot.data.docs.map((document) {
                 return Card(
                   child: ListTile(
+                    onTap: () { Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProblemViewPage(documentId : document.id)
+                      )
+                    );
+                    },
                     leading: CachedNetworkImage(
                       //TODO : changer l'image pour qu'elle corresponde au probleme.
                       imageUrl: 'https://image.flaticon.com/icons/png/512/40/40031.png',
                       progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
                       errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
-                    contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 5),
+                    contentPadding: const EdgeInsets.only(left: 5, top: 5, bottom: 5, right: 5),
                     subtitle:
                     Row(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: <Widget>[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(padding: EdgeInsets.only(top: 5)),
-                        if (document['description'] != null)
-                          Text.rich(TextSpan(text: document['description'].toString(), style: const TextStyle(fontWeight: FontWeight.bold),)),
                         if (document['appareil'] != null)
                           Text.rich(TextSpan(text: document['appareil'].toString(), style: const TextStyle(fontWeight: FontWeight.bold),)),
+                        const Padding(padding: EdgeInsets.only(top: 5)),
+                        if (document['description'] != null)
+                          Text.rich(TextSpan(text: document['description'].toString(), style: const TextStyle(fontWeight: FontWeight.bold, color : Colors.black),)),
                         const Padding(padding: EdgeInsets.only(top: 5)),
                       ],
                     ),
@@ -71,7 +78,7 @@ class HomeBody extends StatelessWidget {
                           ]),
                       )
                     ]),
-                    title: document['titre'] != null ? Text(document['titre'].toString()) : const Text(''),
+                    title: document['titre'] != null ? Text(document['titre'].toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)) : const Text(''),
                     //trailing: const Icon(Icons.arrow_forward_rounded),
                   ),
                 );
