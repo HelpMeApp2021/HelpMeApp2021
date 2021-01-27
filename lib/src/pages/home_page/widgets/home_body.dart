@@ -31,13 +31,15 @@ class HomeBody extends StatelessWidget {
                 return Card(
                   child: ListTile(
                     leading: CachedNetworkImage(
-                      //On a pas d'images pour les posts pour le moment.
+                      //TODO : changer l'image pour qu'elle corresponde au probleme.
                       imageUrl: 'https://image.flaticon.com/icons/png/512/40/40031.png',
                       progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(value: downloadProgress.progress),
                       errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
                     contentPadding: const EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 5),
-                    subtitle: Column(
+                    subtitle:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: <Widget>[
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Padding(padding: EdgeInsets.only(top: 5)),
@@ -48,26 +50,29 @@ class HomeBody extends StatelessWidget {
                         const Padding(padding: EdgeInsets.only(top: 5)),
                       ],
                     ),
+                      Expanded(flex : 1, child:
+                      Column(crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                           IconButton(
+                              icon: const Icon(Icons.keyboard_arrow_up_outlined, color : Colors.green),
+                              color: Colors.white,
+                              onPressed: () {
+                                //TODO : Action associée au upvote
+                              },
+                            ),
+                            Text.rich(TextSpan(text : getScore(document), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color : getScoreColor(document)),)),
+                            IconButton(
+                              icon: const Icon(Icons.keyboard_arrow_down_outlined, color : Colors.red),
+                              color: Colors.white,
+                              onPressed: () {
+                                //TODO : Action associée au downvote
+                              },
+                            )
+                          ]),
+                      )
+                    ]),
                     title: document['titre'] != null ? Text(document['titre'].toString()) : const Text(''),
-                    trailing: Column(mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Text.rich(TextSpan(text : getScore(document), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0, color : getScoreColor(document)),)),
-                                // TODO : Les iconbuttons ont une taille minimum de 48 pixels, et font planter le trailing.Il faudrait trouver une alternative.
-                                // IconButton(
-                                //   icon: const Icon(Icons.keyboard_arrow_up_outlined, color : Colors.green),
-                                //   color: Colors.white,
-                                //   onPressed: () {
-                                //     //TODO : Action associée au upvote
-                                //   },
-                                // ),
-                                // IconButton(
-                                //   icon: const Icon(Icons.keyboard_arrow_down_outlined, color : Colors.red),
-                                //   color: Colors.white,
-                                //   onPressed: () {
-                                //     //TODO : Action associée au downvote
-                                //   },
-                                // )
-                              ]),
+                    //trailing: const Icon(Icons.arrow_forward_rounded),
                   ),
                 );
               }).toList(),
