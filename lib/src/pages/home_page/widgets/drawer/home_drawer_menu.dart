@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:help_me_app/src/pages/problem_post_page/problem_post_page.dart';
 
 class HomeDrawerMenu extends StatelessWidget {
   const HomeDrawerMenu({
@@ -13,7 +14,7 @@ class HomeDrawerMenu extends StatelessWidget {
       children: [
         RaisedButton.icon(
           onPressed: () {
-            //Navigator.push<ListPublicTourPage>(context, MaterialPageRoute<ListPublicTourPage>(builder: (context) => const ListPublicTourPage()));
+            Navigator.push<ProblemPostPage>(context, MaterialPageRoute<ProblemPostPage>(builder: (context) => const ProblemPostPage()));
           },
           icon: const Icon(Icons.post_add),
           label: const Text('Poster un problème', style: TextStyle(fontSize: 17)),
