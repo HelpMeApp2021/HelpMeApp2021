@@ -15,10 +15,19 @@ class DatabaseService {
   //   });
   // }
 
-  Future<DocumentReference> addDocument(
+  Future<DocumentReference> addPost(
       String collection, String titre, String reference, String description) {
     return firebaseFirestore.collection(collection).add(
         {'titre': titre, 'reference': reference, 'description': description});
+  }
+
+  Future<DocumentReference> addReply(
+      String collection,
+      String id,
+      String nom,
+      String texte) {
+    return firebaseFirestore.collection(collection).add(
+        {'post_id': id, 'user':nom, 'text':texte, 'upvotes': 0, 'downvotes': 0});
   }
 
   Future<DocumentSnapshot> getDocument(String collection, String id) {
@@ -27,5 +36,9 @@ class DatabaseService {
 
   Stream<QuerySnapshot> getCollectionSnapshots(String collection) {
     return firebaseFirestore.collection(collection).snapshots();
+  }
+
+  CollectionReference getCollectionReference(String collection) {
+    return firebaseFirestore.collection(collection);
   }
 }

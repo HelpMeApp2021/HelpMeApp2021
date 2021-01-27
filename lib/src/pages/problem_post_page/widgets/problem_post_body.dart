@@ -141,7 +141,7 @@ class ProblemPostBody extends StatelessWidget {
             onPressed: () {
               //Truc à faire à l'appui, c'est pas mon problème.
               _databaseService
-                  .addDocument('Posts', titreProbleme.text,
+                  .addPost('Posts', titreProbleme.text,
                       referenceAppareil.text, descriptionProbleme.text)
                   .then((docRef) => Navigator.push<ProblemViewPage>(
                       context,

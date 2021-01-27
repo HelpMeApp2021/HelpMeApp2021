@@ -32,16 +32,12 @@ class ProblemViewBody extends StatelessWidget {
               Text.rich(TextSpan(
                   text: 'Titre : ${snapshot.data['titre']}',
                   style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[50]),
+                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
                   children: [
                     TextSpan(
                       text: '...',
                       style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey[50]),
+                          fontWeight: FontWeight.bold, color: Colors.grey[350]),
                     )
                   ])),
               const Padding(
@@ -50,16 +46,12 @@ class ProblemViewBody extends StatelessWidget {
               Text.rich(TextSpan(
                   text: 'Référence appareil : ${snapshot.data['reference']}',
                   style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[50]),
+                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
                   children: [
                     TextSpan(
                       text: '...',
                       style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey[50]),
+                          fontWeight: FontWeight.bold, color: Colors.grey[350]),
                     )
                   ])),
               const Padding(
@@ -68,32 +60,36 @@ class ProblemViewBody extends StatelessWidget {
               Text.rich(TextSpan(
                   text: 'Description : ${snapshot.data['description']}',
                   style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey[50]),
+                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
                   children: [
                     TextSpan(
                       text: '...',
                       style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.grey[50]),
+                          fontWeight: FontWeight.bold, color: Colors.grey[350]),
                     )
                   ])),
               const Padding(
                 padding: EdgeInsets.only(top: 10),
               ),
               Center(
-                child: Container(
-                  decoration: const BoxDecoration(),
-                  child: const Text(
-                    'Réponses ',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(),
+                      child: const Text(
+                        'Réponses ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(),
+                      child: const Text('ffs')//listResponses(data),
+                    )
+                  ],
                 ),
               ),
             ],
@@ -101,3 +97,5 @@ class ProblemViewBody extends StatelessWidget {
         });
   }
 }
+
+
