@@ -34,8 +34,8 @@ class ProblemViewPage extends StatelessWidget {
                   builder: (context) =>
                       WriteReplyPage(documentId: _documentId)));
         },
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.message),
+        backgroundColor: const Color(0xff2E4060),
+        child: const Icon(Icons.reply),
       ),
     );
   }

@@ -36,7 +36,6 @@ class ProblemViewBody extends StatelessWidget {
                   child: CircularProgressIndicator(),
                 );
               }
-
               return Column(
                 children: [
                   const Padding(
@@ -104,7 +103,7 @@ class ProblemViewBody extends StatelessWidget {
                         ),
                         Container(
                             decoration: const BoxDecoration(),
-                            child: const Text('ffs') //listResponses(data),
+                            child: Text('ffs')//listResponses(data),
                             )
                       ],
                     ),

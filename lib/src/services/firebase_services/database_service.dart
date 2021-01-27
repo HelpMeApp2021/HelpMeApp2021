@@ -18,7 +18,8 @@ class DatabaseService {
   Future<DocumentReference> addPost(
       String collection, String titre, String appareil, String description) {
     return firebaseFirestore.collection(collection).add(
-        { 'titre': titre,
+        {
+          'titre': titre,
           'appareil': appareil,
           'description': description,
           'upvotes':[],
@@ -29,14 +30,35 @@ class DatabaseService {
   }
 
   Future<DocumentReference> addReply(
-      String collection, String id, String nom, String texte) {
-    return firebaseFirestore.collection(collection).add({
-      'post_id': id,
-      'user': nom,
-      'text': texte,
-      'upvotes': [],
-      'downvotes': []
-    });
+       String id, String user, String texte) async {
+
+      var reponses = List<dynamic>.empty();
+
+      var doc = firebaseFirestore.collection('Posts').doc(id);
+
+      await doc.get().then((doc) {
+        if (doc.exists) {
+          reponses = doc.data()['reponses'] as List<dynamic>;
+
+          print(reponses[0]);
+
+          var _data = Map<String,dynamic>();
+
+          _data['texte'] = texte;
+          _data['user'] = user;
+          _data['upvotes'] = [];
+          _data['downvotes'] = [];
+
+          reponses.add(_data);
+          print('reponses: '+ reponses.length.toString());
+        }
+      });
+
+      if(reponses.isNotEmpty) {
+        await doc.update({
+          'reponses': reponses
+        });
+      }
   }
 
   Future<DocumentSnapshot> getDocument(String collection, String id) {
