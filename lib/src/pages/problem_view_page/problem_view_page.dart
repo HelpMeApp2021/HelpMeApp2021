@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:help_me_app/src/pages/write_reply_page/widgets/write_reply_main.dart';
+import 'package:help_me_app/src/pages/write_reply_page/write_reply_page.dart';
 import 'package:provider/provider.dart';
 
 import 'widgets/problem_view_main.dart';
@@ -28,10 +28,12 @@ class ProblemViewPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          MaterialPageRoute<WriteReplyMain>(
-              builder: (context) =>
-                  WriteReplyMain(documentId: _documentId));
-        },
+          Navigator.push<WriteReplyPage>(
+              context,
+              MaterialPageRoute<WriteReplyPage>(
+                  builder: (context) =>
+                      WriteReplyPage(documentId: _documentId)));
+            },
         backgroundColor: Colors.green,
         child: const Icon(Icons.message),
       ),
