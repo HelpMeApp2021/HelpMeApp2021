@@ -16,9 +16,16 @@ class DatabaseService {
   // }
 
   Future<DocumentReference> addPost(
-      String collection, String titre, String reference, String description) {
+      String collection, String titre, String appareil, String description) {
     return firebaseFirestore.collection(collection).add(
-        {'titre': titre, 'reference': reference, 'description': description});
+        { 'titre': titre,
+          'appareil': appareil,
+          'description': description,
+          'upvotes':[],
+          'downvotes':[],
+          'resolu':false,
+          'tags':[]
+        });
   }
 
   Future<DocumentReference> addReply(
@@ -27,8 +34,8 @@ class DatabaseService {
       'post_id': id,
       'user': nom,
       'text': texte,
-      'upvotes': 0,
-      'downvotes': 0
+      'upvotes': [],
+      'downvotes': []
     });
   }
 
