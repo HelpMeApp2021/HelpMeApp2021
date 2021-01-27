@@ -14,10 +14,14 @@ class HomeDrawerMenu extends StatelessWidget {
       children: [
         RaisedButton.icon(
           onPressed: () {
-            Navigator.push<ProblemPostPage>(context, MaterialPageRoute<ProblemPostPage>(builder: (context) => const ProblemPostPage()));
+            Navigator.push<ProblemPostPage>(
+                context,
+                MaterialPageRoute<ProblemPostPage>(
+                    builder: (context) => const ProblemPostPage()));
           },
           icon: const Icon(Icons.post_add),
-          label: const Text('Poster un problème', style: TextStyle(fontSize: 17)),
+          label:
+              const Text('Poster un problème', style: TextStyle(fontSize: 17)),
           padding: const EdgeInsets.only(top: 15, bottom: 15),
           shape: const RoundedRectangleBorder(),
         ),

@@ -32,7 +32,8 @@ class TextFormFieldCustom extends StatelessWidget {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10),
+            padding:
+                const EdgeInsets.only(left: 40, right: 40, top: 10, bottom: 10),
             child: TextFormField(
               obscureText: _obscureText,
               keyboardType: _textInputType,

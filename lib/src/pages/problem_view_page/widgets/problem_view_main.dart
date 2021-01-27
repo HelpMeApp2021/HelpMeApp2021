@@ -13,7 +13,6 @@ class ProblemViewMain extends StatelessWidget {
     return Column(
       children: const [
         ProblemViewBody(),
-
       ],
     );
   }

@@ -30,13 +30,16 @@ class RegisterBody extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const Text('Inscription', style: TextStyle(fontSize: 35, color: Colors.blueGrey)),
+                const Text('Inscription',
+                    style: TextStyle(fontSize: 35, color: Colors.blueGrey)),
                 Form(
                   key: context.watch<GlobalKey<FormState>>(),
                   child: Column(
                     children: [
                       TextFormFieldCustom(
-                        controller: context.watch<RegisterInputControllerModel>().emailController,
+                        controller: context
+                            .watch<RegisterInputControllerModel>()
+                            .emailController,
                         textInputType: TextInputType.emailAddress,
                         hintText: 'Email',
                         obscureText: false,
@@ -48,7 +51,9 @@ class RegisterBody extends StatelessWidget {
                         },
                       ),
                       TextFormFieldCustom(
-                        controller: context.watch<RegisterInputControllerModel>().passwordController,
+                        controller: context
+                            .watch<RegisterInputControllerModel>()
+                            .passwordController,
                         textInputType: TextInputType.text,
                         hintText: 'Mot de passe',
                         obscureText: true,
@@ -60,7 +65,9 @@ class RegisterBody extends StatelessWidget {
                         },
                       ),
                       TextFormFieldCustom(
-                        controller: context.watch<RegisterInputControllerModel>().pseudoController,
+                        controller: context
+                            .watch<RegisterInputControllerModel>()
+                            .pseudoController,
                         textInputType: TextInputType.text,
                         hintText: 'Pseudo',
                         obscureText: false,

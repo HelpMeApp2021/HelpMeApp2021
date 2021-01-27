@@ -25,7 +25,8 @@ class LoginMain extends StatelessWidget {
       child: MultiProvider(
         providers: [
           Provider<GlobalKey<FormState>>(create: (_) => GlobalKey<FormState>()),
-          Provider<LoginInputControllerModel>(create: (_) => LoginInputControllerModel()),
+          Provider<LoginInputControllerModel>(
+              create: (_) => LoginInputControllerModel()),
         ],
         child: Column(
           children: const [LoginBody(), LoginBottom()],

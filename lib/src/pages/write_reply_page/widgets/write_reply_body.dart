@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:help_me_app/src/pages/problem_view_page/problem_view_page.dart';
+
 import '../../../services/firebase_services/database_service.dart';
 
-
 class WriteReplyBody extends StatelessWidget {
-
   const WriteReplyBody({
     Key key,
     String documentId,
@@ -28,17 +27,16 @@ class WriteReplyBody extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             Expanded(
                 child: Text(
-                  'Votre Nom :',
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                )),
+              'Votre Nom :',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.grey[350]),
+            )),
             Expanded(
               child: TextFormField(
                 controller: nomReponse,
-                decoration:
-                const InputDecoration(labelText: 'Votre Nom*'),
+                decoration: const InputDecoration(labelText: 'Votre Nom*'),
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.grey[350]),
                 validator: (value) {
@@ -54,17 +52,16 @@ class WriteReplyBody extends StatelessWidget {
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             Expanded(
                 child: Text(
-                  "Votre Réponse :",
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                )),
+              "Votre Réponse :",
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.grey[350]),
+            )),
             Expanded(
               child: TextFormField(
                 controller: texteReponse,
-                decoration: const InputDecoration(
-                    labelText: 'Votre Réponse*'),
+                decoration: const InputDecoration(labelText: 'Votre Réponse*'),
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.grey[350]),
                 validator: (value) {
@@ -84,15 +81,13 @@ class WriteReplyBody extends StatelessWidget {
             onPressed: () {
               //Truc à faire à l'appui, c'est pas mon problème.
               _databaseService
-                  .addReply('Reponses',
-                  _documentId,
-                  nomReponse.text,
-                  texteReponse.text)
+                  .addReply('Reponses', _documentId, nomReponse.text,
+                      texteReponse.text)
                   .then((docRef) => Navigator.push<ProblemViewPage>(
-                  context,
-                  MaterialPageRoute<ProblemViewPage>(
-                      builder: (context) =>
-                          ProblemViewPage(documentId: _documentId))));
+                      context,
+                      MaterialPageRoute<ProblemViewPage>(
+                          builder: (context) =>
+                              ProblemViewPage(documentId: _documentId))));
             },
           )
         ],

@@ -25,7 +25,8 @@ class RegisterMain extends StatelessWidget {
       child: MultiProvider(
         providers: [
           Provider<GlobalKey<FormState>>(create: (_) => GlobalKey<FormState>()),
-          Provider<RegisterInputControllerModel>(create: (_) => RegisterInputControllerModel()),
+          Provider<RegisterInputControllerModel>(
+              create: (_) => RegisterInputControllerModel()),
         ],
         child: Column(
           children: const [RegisterBody(), RegisterBottom()],

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,78 +25,94 @@ class ProblemViewBody extends StatelessWidget {
             );
           }
 
-          return Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 5),
-              ),
-              Text.rich(TextSpan(
-                  text: 'Titre : ${snapshot.data['titre']}',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                  children: [
-                    TextSpan(
-                      text: '...',
+          return StreamBuilder(
+            stream: _databaseService
+                .getDocumentWithDocumentReference(
+                    snapshot.data['appareil'] as DocumentReference)
+                .asStream(),
+            builder: (context, appareil) {
+              if (!appareil.hasData) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+
+              return Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 5),
+                  ),
+                  Text.rich(TextSpan(
+                      text: 'Titre : ${snapshot.data['titre']}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                    )
-                  ])),
-              const Padding(
-                padding: EdgeInsets.only(top: 5),
-              ),
-              Text.rich(TextSpan(
-                  text: 'Référence appareil : ${snapshot.data['reference']}',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                  children: [
-                    TextSpan(
-                      text: '...',
+                      children: [
+                        TextSpan(
+                          text: '...',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[350]),
+                        )
+                      ])),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 5),
+                  ),
+                  Text.rich(TextSpan(
+                      text:
+                          'Référence appareil : ${appareil.data['reference']}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                    )
-                  ])),
-              const Padding(
-                padding: EdgeInsets.only(top: 5),
-              ),
-              Text.rich(TextSpan(
-                  text: 'Description : ${snapshot.data['description']}',
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                  children: [
-                    TextSpan(
-                      text: '...',
+                      children: [
+                        TextSpan(
+                          text: '...',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[350]),
+                        )
+                      ])),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 5),
+                  ),
+                  Text.rich(TextSpan(
+                      text: 'Description : ${snapshot.data['description']}',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                    )
-                  ])),
-              const Padding(
-                padding: EdgeInsets.only(top: 10),
-              ),
-              Center(
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: const BoxDecoration(),
-                      child: const Text(
-                        'Réponses ',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
+                      children: [
+                        TextSpan(
+                          text: '...',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.grey[350]),
+                        )
+                      ])),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10),
+                  ),
+                  Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: const BoxDecoration(),
+                          child: const Text(
+                            'Réponses ',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                        ),
+                        Container(
+                            decoration: const BoxDecoration(),
+                            child: const Text('ffs') //listResponses(data),
+                            )
+                      ],
                     ),
-                    Container(
-                      decoration: const BoxDecoration(),
-                      child: const Text('ffs')//listResponses(data),
-                    )
-                  ],
-                ),
-              ),
-            ],
+                  ),
+                ],
+              );
+            },
           );
         });
   }
 }
-
-

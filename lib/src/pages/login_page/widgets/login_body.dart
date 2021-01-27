@@ -30,13 +30,16 @@ class LoginBody extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const Text('Connexion', style: TextStyle(fontSize: 35, color: Colors.blueGrey)),
+                const Text('Connexion',
+                    style: TextStyle(fontSize: 35, color: Colors.blueGrey)),
                 Form(
                   key: context.watch<GlobalKey<FormState>>(),
                   child: Column(
                     children: [
                       TextFormFieldCustom(
-                        controller: context.watch<LoginInputControllerModel>().emailController,
+                        controller: context
+                            .watch<LoginInputControllerModel>()
+                            .emailController,
                         textInputType: TextInputType.emailAddress,
                         hintText: 'Email',
                         obscureText: false,
@@ -48,7 +51,9 @@ class LoginBody extends StatelessWidget {
                         },
                       ),
                       TextFormFieldCustom(
-                        controller: context.watch<LoginInputControllerModel>().passwordController,
+                        controller: context
+                            .watch<LoginInputControllerModel>()
+                            .passwordController,
                         textInputType: TextInputType.text,
                         hintText: 'Mot de passe',
                         obscureText: true,

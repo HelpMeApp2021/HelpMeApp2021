@@ -7,8 +7,8 @@ import 'widgets/problem_view_main.dart';
 
 class ProblemViewPage extends StatelessWidget {
   const ProblemViewPage({
+    @required String documentId,
     Key key,
-    String documentId,
   })  : _documentId = documentId,
         super(key: key);
 
@@ -33,7 +33,7 @@ class ProblemViewPage extends StatelessWidget {
               MaterialPageRoute<WriteReplyPage>(
                   builder: (context) =>
                       WriteReplyPage(documentId: _documentId)));
-            },
+        },
         backgroundColor: Colors.green,
         child: const Icon(Icons.message),
       ),

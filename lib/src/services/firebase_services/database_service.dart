@@ -22,20 +22,26 @@ class DatabaseService {
   }
 
   Future<DocumentReference> addReply(
-      String collection,
-      String id,
-      String nom,
-      String texte) {
-    return firebaseFirestore.collection(collection).add(
-        {'post_id': id, 'user':nom, 'text':texte, 'upvotes': 0, 'downvotes': 0});
+      String collection, String id, String nom, String texte) {
+    return firebaseFirestore.collection(collection).add({
+      'post_id': id,
+      'user': nom,
+      'text': texte,
+      'upvotes': 0,
+      'downvotes': 0
+    });
   }
 
   Future<DocumentSnapshot> getDocument(String collection, String id) {
     return firebaseFirestore.collection(collection).doc(id).get();
   }
 
-  Stream<QuerySnapshot> getCollectionSnapshots(String collection) {
-    return firebaseFirestore.collection(collection).snapshots();
+  Future<DocumentSnapshot> getDocumentWithDocumentReference(
+      DocumentReference documentReference) {
+    return firebaseFirestore
+        .collection(documentReference.parent.id)
+        .doc(documentReference.id)
+        .get();
   }
 
   CollectionReference getCollectionReference(String collection) {

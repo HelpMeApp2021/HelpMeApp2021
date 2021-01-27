@@ -16,6 +16,7 @@ class HomeDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final _firebaseUser = context.watch<User>();
     final _scrollController = ScrollController();
+
     return Drawer(
       child: Container(
         color: const Color(0xff34495E),

@@ -20,13 +20,24 @@ class LoginBottom extends StatelessWidget {
         children: [
           RaisedButton.icon(
             onPressed: () {
-              if (context.read<GlobalKey<FormState>>().currentState.validate()) {
+              if (context
+                  .read<GlobalKey<FormState>>()
+                  .currentState
+                  .validate()) {
                 context
                     .read<AuthService>()
                     .signIn(
-                  email: context.read<LoginInputControllerModel>().emailController.text.trim(),
-                  password: context.read<LoginInputControllerModel>().passwordController.text.trim(),
-                )
+                      email: context
+                          .read<LoginInputControllerModel>()
+                          .emailController
+                          .text
+                          .trim(),
+                      password: context
+                          .read<LoginInputControllerModel>()
+                          .passwordController
+                          .text
+                          .trim(),
+                    )
                     .then((value) {
                   if (value == 'Signed in') {
                     // Ne fonctionne pas, mieux vaut utiliser un StatefulWidget et dispose()
@@ -42,14 +53,23 @@ class LoginBottom extends StatelessWidget {
           const Padding(padding: EdgeInsets.only(top: 5)),
           GestureDetector(
             onTap: () {
-              Navigator.push<RegisterPage>(context, MaterialPageRoute<RegisterPage>(builder: (context) => const RegisterPage()));
+              Navigator.push<RegisterPage>(
+                  context,
+                  MaterialPageRoute<RegisterPage>(
+                      builder: (context) => const RegisterPage()));
             },
-            child: const Text.rich(TextSpan(text: 'Pas de compte ? ', style: TextStyle(color: Colors.white70), children: [
-              TextSpan(
-                text: 'Inscrivez-vous.',
-                style: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold, decoration: TextDecoration.underline),
-              )
-            ])),
+            child: const Text.rich(TextSpan(
+                text: 'Pas de compte ? ',
+                style: TextStyle(color: Colors.white70),
+                children: [
+                  TextSpan(
+                    text: 'Inscrivez-vous.',
+                    style: TextStyle(
+                        color: Colors.white70,
+                        fontWeight: FontWeight.bold,
+                        decoration: TextDecoration.underline),
+                  )
+                ])),
           ),
         ],
       ),

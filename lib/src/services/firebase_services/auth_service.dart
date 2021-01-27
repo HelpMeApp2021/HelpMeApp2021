@@ -32,13 +32,15 @@ class AuthService {
     try {
       final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      await userCredential.user
-          .updateProfile(displayName: pseudo);
+      await userCredential.user.updateProfile(displayName: pseudo);
       await signIn(email: email, password: password);
 
       final _databaseService = DatabaseService();
 
-      await _databaseService.firebaseFirestore.collection('Users').doc(userCredential.user.uid).set({
+      await _databaseService.firebaseFirestore
+          .collection('Users')
+          .doc(userCredential.user.uid)
+          .set({
         'postsRefs': [],
         'appareils': [],
         'abonnmnt': [],

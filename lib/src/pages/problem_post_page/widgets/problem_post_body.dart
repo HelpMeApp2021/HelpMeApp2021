@@ -109,19 +109,18 @@ class ProblemPostBody extends StatelessWidget {
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             Expanded(
-              //TODO : Ajouter les tags dans la base de données.
+                //TODO : Ajouter les tags dans la base de données.
                 child: Text(
-                  'Tags (séparés par une virgule) :',
-                  textAlign: TextAlign.center,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                )),
+              'Tags (séparés par une virgule) :',
+              textAlign: TextAlign.center,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.grey[350]),
+            )),
             Expanded(
               child: TextFormField(
                 controller: tagsProbleme,
-                decoration:
-                const InputDecoration(labelText: 'Tags'),
+                decoration: const InputDecoration(labelText: 'Tags'),
                 style: TextStyle(
                     fontWeight: FontWeight.bold, color: Colors.grey[350]),
                 validator: (value) {
@@ -141,8 +140,8 @@ class ProblemPostBody extends StatelessWidget {
             onPressed: () {
               //Truc à faire à l'appui, c'est pas mon problème.
               _databaseService
-                  .addPost('Posts', titreProbleme.text,
-                      referenceAppareil.text, descriptionProbleme.text)
+                  .addPost('Posts', titreProbleme.text, referenceAppareil.text,
+                      descriptionProbleme.text)
                   .then((docRef) => Navigator.push<ProblemViewPage>(
                       context,
                       MaterialPageRoute<ProblemViewPage>(
