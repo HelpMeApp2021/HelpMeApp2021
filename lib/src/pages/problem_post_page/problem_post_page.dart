@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'widgets/drawer/problem_post_drawer.dart';
 import 'widgets/problem_post_main.dart';
 
 class ProblemPostPage extends StatelessWidget {
@@ -26,7 +24,6 @@ class ProblemPostPage extends StatelessWidget {
           backgroundColor: const Color(0xff2E4060),
           title: const Text('Poster un problème'),
         ),
-        drawer: const ProblemPostDrawer(),
         body: const ProblemPostMain(),
       ),
     );
