@@ -118,9 +118,23 @@ class HomeBody extends StatelessWidget {
                           )
                         ]),
                     title: document['titre'] != null
-                        ? Text(document['titre'].toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20.0))
+                        ?
+                        document['resolu'] == true
+                        ?
+                        Row(
+                            children: <Widget>[
+                              Icon(Icons.check, color: Colors.green,),
+                              Text("[Resolu] " + document['titre'].toString(),
+                              style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20.0))
+                      ]
+                        ) : Row(
+                            children: <Widget>[
+                              Text(document['titre'].toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 20.0))
+                            ]
+                        )
                         : const Text(''),
                     //trailing: const Icon(Icons.arrow_forward_rounded),
                   ),
