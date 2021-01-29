@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -25,17 +24,6 @@ class ProblemViewBody extends StatelessWidget {
             );
           }
 
-          return StreamBuilder(
-            stream: _databaseService
-                .getDocumentWithDocumentReference(
-                    snapshot.data['appareil'] as DocumentReference)
-                .asStream(),
-            builder: (context, appareil) {
-              if (!appareil.hasData) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
               return Column(
                 children: [
                   const Padding(
@@ -58,32 +46,16 @@ class ProblemViewBody extends StatelessWidget {
                   ),
                   Text.rich(TextSpan(
                       text:
-                          'Référence appareil : ${appareil.data['reference']}',
+                          'Appareil : ${snapshot.data['appareil']}',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                      children: [
-                        TextSpan(
-                          text: '...',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[350]),
-                        )
-                      ])),
+                          fontWeight: FontWeight.bold, color: Colors.grey[350]),)),
                   const Padding(
                     padding: EdgeInsets.only(top: 5),
                   ),
                   Text.rich(TextSpan(
                       text: 'Description : ${snapshot.data['description']}',
                       style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.grey[350]),
-                      children: [
-                        TextSpan(
-                          text: '...',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey[350]),
-                        )
-                      ])),
+                          fontWeight: FontWeight.bold, color: Colors.grey[350]),)),
                   const Padding(
                     padding: EdgeInsets.only(top: 10),
                   ),
@@ -103,7 +75,7 @@ class ProblemViewBody extends StatelessWidget {
                         ),
                         Container(
                             decoration: const BoxDecoration(),
-                            child: Text('ffs')//listResponses(data),
+                            child: listReponses(snapshot.data['reponses'] as List<dynamic>),
                             )
                       ],
                     ),
@@ -112,6 +84,32 @@ class ProblemViewBody extends StatelessWidget {
               );
             },
           );
-        });
-  }
+        }
+}
+
+Widget listReponses(List<dynamic> data){
+
+  // data.forEach((element) {
+  //
+  // });
+if(data.isNotEmpty) {
+  return SizedBox(
+    height: 500,
+    child: Scrollbar(
+      child: ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Card(
+                child: ListTile(
+                  title: Text(data[index]['user'].toString() + " à répondu: "),
+                  subtitle: Text(data[index]['texte'].toString()),
+                )
+            );
+          }),
+    ),
+  );
+}else{
+  return const Text('Pas encore de réponses, soyez le premier à répondre !');
+}
+
 }

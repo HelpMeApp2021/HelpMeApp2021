@@ -25,7 +25,8 @@ class DatabaseService {
           'upvotes':[],
           'downvotes':[],
           'resolu':false,
-          'tags':[]
+          'tags':[],
+          'reponses':[]
         });
   }
 

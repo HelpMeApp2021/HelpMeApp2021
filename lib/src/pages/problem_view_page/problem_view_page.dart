@@ -26,7 +26,8 @@ class ProblemViewPage extends StatelessWidget {
         value: _documentId,
         child: const ProblemViewMain(),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text("Répondre"),
         onPressed: () {
           Navigator.push<WriteReplyPage>(
               context,
@@ -34,8 +35,9 @@ class ProblemViewPage extends StatelessWidget {
                   builder: (context) =>
                       WriteReplyPage(documentId: _documentId)));
         },
-        backgroundColor: const Color(0xff2E4060),
-        child: const Icon(Icons.reply),
+        backgroundColor: Colors.white,
+        foregroundColor: const Color(0xff2E4060),
+        icon: const Icon(Icons.reply),
       ),
     );
   }
