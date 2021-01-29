@@ -40,8 +40,6 @@ class DatabaseService {
         if (doc.exists) {
           reponses = doc.data()['reponses'] as List<dynamic>;
 
-          print(reponses[0]);
-
           var _data = Map<String,dynamic>();
 
           _data['texte'] = texte;
@@ -50,7 +48,6 @@ class DatabaseService {
           _data['downvotes'] = [];
 
           reponses.add(_data);
-          print('reponses: '+ reponses.length.toString());
         }
       });
 
