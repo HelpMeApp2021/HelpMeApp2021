@@ -30,7 +30,14 @@ class HomeBody extends StatelessWidget {
           }
           return Scrollbar(
             child: ListView(
-              children: snapshot.data.docs.map((document) {
+              children: snapshot.data.docs
+                  .where((document) =>
+          document['titre']
+              .toString()
+              .toLowerCase()
+              .contains(context.watch<TextEditingController>().text.trim().toLowerCase())
+              )
+              .map((document)  {
                 return Card(
                   child: ListTile(
                     onTap: () {

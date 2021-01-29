@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/drawer/home_drawer.dart';
 import 'widgets/home_main.dart';
@@ -11,6 +12,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textEditingControllerSearchBar = TextEditingController();
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
@@ -27,7 +29,7 @@ class HomePage extends StatelessWidget {
           title: const Text('Accueil'),
         ),
         drawer: const HomeDrawer(),
-        body: const HomeMain(),
+        body: ChangeNotifierProvider.value(value: textEditingControllerSearchBar, child: const HomeMain()),
       ),
     );
   }
