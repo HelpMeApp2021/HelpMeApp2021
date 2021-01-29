@@ -64,25 +64,29 @@ class HomeBody extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (document['appareil'] != null)
-                                Text.rich(TextSpan(
-                                  text: document['appareil'].toString(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                )),
-                              const Padding(padding: EdgeInsets.only(top: 5)),
-                              if (document['description'] != null)
-                                Text.rich(TextSpan(
-                                  text: document['description'].toString(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black),
-                                )),
-                              const Padding(padding: EdgeInsets.only(top: 5)),
-                            ],
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            child: Column(
+
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (document['appareil'] != null)
+                                  Text.rich(TextSpan(
+                                    text: document['appareil'].toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                                const Padding(padding: EdgeInsets.only(top: 5)),
+                                if (document['description'] != null)
+                                  Text.rich(TextSpan(
+                                    text: document['description'].toString(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  )),
+                                const Padding(padding: EdgeInsets.only(top: 5)),
+                              ],
+                            ),
                           ),
                           Expanded(
                             flex: 1,
