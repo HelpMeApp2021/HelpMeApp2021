@@ -32,31 +32,36 @@ class ProblemViewBody extends StatelessWidget {
             Text.rich(TextSpan(
                 text: snapshot.data['titre'].toString(),
                 style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey[200],
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[200],
                     fontSize: 25.0),
                 children: [
                   TextSpan(
                     text: '',
                     style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[350]),
+                        fontWeight: FontWeight.bold, color: Colors.grey[350]),
                   )
                 ])),
             const Padding(
               padding: EdgeInsets.only(top: 5),
             ),
             Text.rich(TextSpan(
-              text:
-              'Appareil : ${snapshot.data['appareil']}',
+              text: 'Appareil : ${snapshot.data['appareil']}',
               style: TextStyle(
-                  fontSize : 18, fontWeight: FontWeight.bold, color: Colors.blue[300]),)),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue[300]),
+            )),
             const Padding(
               padding: EdgeInsets.only(top: 8),
             ),
             Text.rich(TextSpan(
               text: 'Description : ${snapshot.data['description']}',
               style: TextStyle(
-                  fontSize : 15,fontWeight: FontWeight.bold, color: Colors.grey[350]),)),
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[350]),
+            )),
             const Padding(
               padding: EdgeInsets.only(top: 10),
             ),
@@ -76,7 +81,8 @@ class ProblemViewBody extends StatelessWidget {
                   ),
                   Container(
                     decoration: const BoxDecoration(),
-                    child: listReponses(snapshot.data['reponses'] as List<dynamic>),
+                    child: listReponses(
+                        snapshot.data['reponses'] as List<dynamic>),
                   )
                 ],
               ),
@@ -88,12 +94,11 @@ class ProblemViewBody extends StatelessWidget {
   }
 }
 
-Widget listReponses(List<dynamic> data){
-
+Widget listReponses(List<dynamic> data) {
   // data.forEach((element) {
   //
   // });
-  if(data.isNotEmpty) {
+  if (data.isNotEmpty) {
     return SizedBox(
       height: 500,
       child: Scrollbar(
@@ -102,18 +107,15 @@ Widget listReponses(List<dynamic> data){
             itemBuilder: (BuildContext context, int index) {
               return Card(
                   child: ListTile(
-                    title: Text(data[index]['user'].toString() + " à répondu: "),
-                    subtitle: Text(data[index]['texte'].toString()),
-                  )
-              );
+                title: Text(data[index]['user'].toString() + " à répondu: "),
+                subtitle: Text(data[index]['texte'].toString()),
+              ));
             }),
       ),
     );
-  }else{
-    return const Text('Pas encore de réponses, soyez le premier à répondre !',style: TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.bold,
-        color: Colors.grey));
+  } else {
+    return const Text('Pas encore de réponses, soyez le premier à répondre !',
+        style: TextStyle(
+            fontSize: 15, fontWeight: FontWeight.bold, color: Colors.grey));
   }
-
 }

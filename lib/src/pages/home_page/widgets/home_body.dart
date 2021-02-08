@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -5,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:math';
 
 import '../../../services/firebase_services/database_service.dart';
 import '../../problem_view_page/problem_view_page.dart';
@@ -32,13 +32,15 @@ class HomeBody extends StatelessWidget {
           return Scrollbar(
             child: ListView(
               children: snapshot.data.docs
-                  .where((document) =>
-                  document['titre']
+                  .where((document) => document['titre']
                       .toString()
                       .toLowerCase()
-                      .contains(context.watch<TextEditingController>().text.trim().toLowerCase())
-              )
-                  .map((document)  {
+                      .contains(context
+                          .watch<TextEditingController>()
+                          .text
+                          .trim()
+                          .toLowerCase()))
+                  .map((document) {
                 return Card(
                   child: ListTile(
                     onTap: () {
@@ -51,13 +53,13 @@ class HomeBody extends StatelessWidget {
                     leading: CachedNetworkImage(
                       //TODO : changer l'image pour qu'elle corresponde au probleme.
                       imageUrl:
-                      'https://image.flaticon.com/icons/png/512/40/40031.png',
+                          'https://image.flaticon.com/icons/png/512/40/40031.png',
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) =>
-                          CircularProgressIndicator(
-                              value: downloadProgress.progress),
+                              CircularProgressIndicator(
+                                  value: downloadProgress.progress),
                       errorWidget: (context, url, error) =>
-                      const Icon(Icons.error),
+                          const Icon(Icons.error),
                     ),
                     contentPadding: const EdgeInsets.only(
                         left: 5, top: 5, bottom: 5, right: 5),
@@ -68,7 +70,6 @@ class HomeBody extends StatelessWidget {
                           Container(
                             width: MediaQuery.of(context).size.width * 0.6,
                             child: Column(
-
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 if (document['appareil'] != null)
@@ -100,7 +101,8 @@ class HomeBody extends StatelessWidget {
                                         color: Colors.green),
                                     color: Colors.white,
                                     onPressed: () {
-                                      registerUpVote(document, _firebaseUser.uid, _databaseService);
+                                      registerUpVote(document,
+                                          _firebaseUser.uid, _databaseService);
                                     },
                                   ),
                                   Text.rich(TextSpan(
@@ -116,30 +118,37 @@ class HomeBody extends StatelessWidget {
                                         color: Colors.red),
                                     color: Colors.white,
                                     onPressed: () {
-                                      registerDownVote(document, _firebaseUser.uid, _databaseService);
+                                      registerDownVote(document,
+                                          _firebaseUser.uid, _databaseService);
                                     },
                                   )
                                 ]),
                           )
                         ]),
                     title: document['titre'] != null
-                        ?
-                    document['resolu'] == true
-                        ?
-                    Row(
-                        children: <Widget>[
-                          Icon(Icons.check, color: Colors.green,),
-                          Text(reduceString("[Resolu] " + document['titre'].toString(),28),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20.0))
-                        ]
-                    ) : Row(
-                        children: <Widget>[
-                          Text(reduceString(document['titre'].toString(),28),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 20.0))
-                        ]
-                    )
+                        ? document['resolu'] == true
+                            ? Row(children: <Widget>[
+                                Icon(
+                                  Icons.check,
+                                  color: Colors.green,
+                                ),
+                                Text(
+                                    reduceString(
+                                        "[Resolu] " +
+                                            document['titre'].toString(),
+                                        28),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0))
+                              ])
+                            : Row(children: <Widget>[
+                                Text(
+                                    reduceString(
+                                        document['titre'].toString(), 28),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20.0))
+                              ])
                         : const Text(''),
                     //trailing: const Icon(Icons.arrow_forward_rounded),
                   ),
@@ -152,8 +161,8 @@ class HomeBody extends StatelessWidget {
     );
   }
 
-  String reduceString(String str, int lengthMax){
-    if(str.length > lengthMax){
+  String reduceString(String str, int lengthMax) {
+    if (str.length > lengthMax) {
       return str.substring(0, lengthMax) + "...";
     }
     return str;
@@ -162,7 +171,7 @@ class HomeBody extends StatelessWidget {
   String getScore(QueryDocumentSnapshot document) {
     List<dynamic> upVotes = List.from(document['upvotes'] as Iterable<dynamic>);
     List<dynamic> downvotes =
-    List.from(document['downvotes'] as Iterable<dynamic>);
+        List.from(document['downvotes'] as Iterable<dynamic>);
     int result = upVotes.length - downvotes.length;
     if (result > 0) return "+" + result.toString();
     return result.toString();
@@ -171,50 +180,52 @@ class HomeBody extends StatelessWidget {
   Color getScoreColor(QueryDocumentSnapshot document) {
     List<dynamic> upVotes = List.from(document['upvotes'] as Iterable<dynamic>);
     List<dynamic> downvotes =
-    List.from(document['downvotes'] as Iterable<dynamic>);
+        List.from(document['downvotes'] as Iterable<dynamic>);
     int result = upVotes.length - downvotes.length;
     if (result < 0) return Colors.red;
     if (result > 0) return Colors.green;
     return Colors.black54;
   }
 
-  void registerUpVote(QueryDocumentSnapshot document, String userId, DatabaseService db){
-    List<String> upVotes = List<String>.from(document['upvotes'] as List<dynamic>);
-    List<String> downVotes = List<String>.from(document['downvotes'] as List<dynamic>);
-    if(upVotes.contains(userId)){
+  void registerUpVote(
+      QueryDocumentSnapshot document, String userId, DatabaseService db) {
+    List<String> upVotes =
+        List<String>.from(document['upvotes'] as List<dynamic>);
+    List<String> downVotes =
+        List<String>.from(document['downvotes'] as List<dynamic>);
+    if (upVotes.contains(userId)) {
       upVotes.remove(userId);
-    }
-    else{
+    } else {
       upVotes.add(userId);
-      if(downVotes.contains(userId)){
+      if (downVotes.contains(userId)) {
         downVotes.remove(userId);
       }
     }
 
-    db.firebaseFirestore.collection("Posts").doc(document.id).update({
-      "upvotes": upVotes,
-      "downvotes": downVotes
-    });
-
+    db.firebaseFirestore
+        .collection("Posts")
+        .doc(document.id)
+        .update({"upvotes": upVotes, "downvotes": downVotes});
   }
 
-  void registerDownVote(QueryDocumentSnapshot document, String userId, DatabaseService db){
-    List<String> upVotes = List<String>.from(document['upvotes'] as List<dynamic>);
-    List<String> downVotes = List<String>.from(document['downvotes'] as List<dynamic>);
-    if(downVotes.contains(userId)){
+  void registerDownVote(
+      QueryDocumentSnapshot document, String userId, DatabaseService db) {
+    List<String> upVotes =
+        List<String>.from(document['upvotes'] as List<dynamic>);
+    List<String> downVotes =
+        List<String>.from(document['downvotes'] as List<dynamic>);
+    if (downVotes.contains(userId)) {
       downVotes.remove(userId);
-    }
-    else{
+    } else {
       downVotes.add(userId);
-      if(upVotes.contains(userId)){
+      if (upVotes.contains(userId)) {
         upVotes.remove(userId);
       }
     }
 
-    db.firebaseFirestore.collection("Posts").doc(document.id).update({
-      "upvotes": upVotes,
-      "downvotes": downVotes
-    });
-
+    db.firebaseFirestore
+        .collection("Posts")
+        .doc(document.id)
+        .update({"upvotes": upVotes, "downvotes": downVotes});
   }
 }

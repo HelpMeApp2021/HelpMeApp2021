@@ -17,46 +17,42 @@ class DatabaseService {
 
   Future<DocumentReference> addPost(
       String collection, String titre, String appareil, String description) {
-    return firebaseFirestore.collection(collection).add(
-        {
-          'titre': titre,
-          'appareil': appareil,
-          'description': description,
-          'upvotes':[],
-          'downvotes':[],
-          'resolu':false,
-          'tags':[],
-          'reponses':[]
-        });
+    return firebaseFirestore.collection(collection).add({
+      'titre': titre,
+      'appareil': appareil,
+      'description': description,
+      'upvotes': [],
+      'downvotes': [],
+      'resolu': false,
+      'tags': [],
+      'reponses': []
+    });
   }
 
   Future<DocumentReference> addReply(
-       String id, String user, String texte) async {
+      String id, String user, String texte) async {
+    var reponses = List<dynamic>.empty();
 
-      var reponses = List<dynamic>.empty();
+    var doc = firebaseFirestore.collection('Posts').doc(id);
 
-      var doc = firebaseFirestore.collection('Posts').doc(id);
+    await doc.get().then((doc) {
+      if (doc.exists) {
+        reponses = doc.data()['reponses'] as List<dynamic>;
 
-      await doc.get().then((doc) {
-        if (doc.exists) {
-          reponses = doc.data()['reponses'] as List<dynamic>;
+        var _data = Map<String, dynamic>();
 
-          var _data = Map<String,dynamic>();
+        _data['texte'] = texte;
+        _data['user'] = user;
+        _data['upvotes'] = [];
+        _data['downvotes'] = [];
 
-          _data['texte'] = texte;
-          _data['user'] = user;
-          _data['upvotes'] = [];
-          _data['downvotes'] = [];
-
-          reponses.add(_data);
-        }
-      });
-
-      if(reponses.isNotEmpty) {
-        await doc.update({
-          'reponses': reponses
-        });
+        reponses.add(_data);
       }
+    });
+
+    if (reponses.isNotEmpty) {
+      await doc.update({'reponses': reponses});
+    }
   }
 
   Future<DocumentSnapshot> getDocument(String collection, String id) {

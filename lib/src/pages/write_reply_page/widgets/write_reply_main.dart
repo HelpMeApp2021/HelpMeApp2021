@@ -15,7 +15,7 @@ class WriteReplyMain extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return ListView(
       children: [
         Provider.value(
             value: _documentId, child: WriteReplyBody(documentId: _documentId))

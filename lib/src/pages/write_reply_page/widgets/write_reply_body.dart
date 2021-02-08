@@ -81,8 +81,7 @@ class WriteReplyBody extends StatelessWidget {
             onPressed: () {
               //Truc à faire à l'appui, c'est pas mon problème.
               _databaseService
-                  .addReply(_documentId, nomReponse.text,
-                      texteReponse.text)
+                  .addReply(_documentId, nomReponse.text, texteReponse.text)
                   .then((docRef) => Navigator.push<ProblemViewPage>(
                       context,
                       MaterialPageRoute<ProblemViewPage>(
