@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:math';
 
 import '../../../services/firebase_services/database_service.dart';
 import '../../problem_view_page/problem_view_page.dart';
@@ -32,12 +33,12 @@ class HomeBody extends StatelessWidget {
             child: ListView(
               children: snapshot.data.docs
                   .where((document) =>
-          document['titre']
-              .toString()
-              .toLowerCase()
-              .contains(context.watch<TextEditingController>().text.trim().toLowerCase())
+                  document['titre']
+                      .toString()
+                      .toLowerCase()
+                      .contains(context.watch<TextEditingController>().text.trim().toLowerCase())
               )
-              .map((document)  {
+                  .map((document)  {
                 return Card(
                   child: ListTile(
                     onTap: () {
@@ -65,7 +66,7 @@ class HomeBody extends StatelessWidget {
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: MediaQuery.of(context).size.width * 0.6,
                             child: Column(
 
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,22 +124,22 @@ class HomeBody extends StatelessWidget {
                         ]),
                     title: document['titre'] != null
                         ?
-                        document['resolu'] == true
+                    document['resolu'] == true
                         ?
-                        Row(
-                            children: <Widget>[
-                              Icon(Icons.check, color: Colors.green,),
-                              Text("[Resolu] " + document['titre'].toString(),
+                    Row(
+                        children: <Widget>[
+                          Icon(Icons.check, color: Colors.green,),
+                          Text(reduceString("[Resolu] " + document['titre'].toString(),28),
                               style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20.0))
-                      ]
-                        ) : Row(
-                            children: <Widget>[
-                              Text(document['titre'].toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold, fontSize: 20.0))
-                            ]
-                        )
+                                  fontWeight: FontWeight.bold, fontSize: 20.0))
+                        ]
+                    ) : Row(
+                        children: <Widget>[
+                          Text(reduceString(document['titre'].toString(),28),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20.0))
+                        ]
+                    )
                         : const Text(''),
                     //trailing: const Icon(Icons.arrow_forward_rounded),
                   ),
@@ -149,6 +150,13 @@ class HomeBody extends StatelessWidget {
         },
       ),
     );
+  }
+
+  String reduceString(String str, int lengthMax){
+    if(str.length > lengthMax){
+      return str.substring(0, lengthMax) + "...";
+    }
+    return str;
   }
 
   String getScore(QueryDocumentSnapshot document) {
